@@ -25,7 +25,6 @@ For example, filterStringsWithVowels('gregor','hound','xyz') returns ['gregor', 
 
 const filterStringsWithVowels = (arr) => {
   return arr.filter(val => (/[aeiou]/i).test(val));
-  //{ /^[aeiou]$/i.test(val) })
 };
 
 
@@ -38,9 +37,10 @@ For example, notInFirstArray([1,2,3], [1,2,3,4]) returns [4].
 ------------------------------------------------------------------------------------------------ */
 
 const notInFirstArray = (forbiddenValues, arr) => {
-  return arr.filter(val => {
-    forbiddenValues.map((val2) => (val2 !== val)
-  )})
+  forbiddenValues.forEach(val => {
+    arr= arr.filter(val2 => val2 != val)
+  })
+  return arr; 
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ const snorlaxData = {
 };
 
 const getBaseStatGreaterThan = (arr, minBaseStat) => {
-  // Solution code here...
+  return arr.filter(val => minBaseStat < val.baseStat);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -95,7 +95,8 @@ For example, getStatName(snorlaxData.stats, 50) will return ['special-defense', 
 ------------------------------------------------------------------------------------------------ */
 
 const getStatName = (arr, minBaseStat) => {
-  // Solution code here...
+  arr = arr.filter(val => minBaseStat < val.baseStat);
+  return arr.map(val => val.stat.name)
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -148,7 +149,7 @@ const characters = [
 ];
 
 const getCharactersWithoutChildren = (arr) => {
-  // Solution code here...
+  return arr.filter(val => !val.children);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -160,7 +161,18 @@ For example: evenOddNumericValues(['Gregor', 2, 4, 1]) returns ['even', 'even', 
 ------------------------------------------------------------------------------------------------ */
 
 const evenOddNumericValues = (arr) => {
-  // Solution code here...
+  arr = arr.filter(val => (/[0-9.-]/g).test(val));
+  arr = arr.filter(val => typeof(val) == "number");
+  console.log(arr);
+  arr.map((val, indx) => {
+    if(val % 2 === 0){
+      arr[indx] = "even"
+    }
+    else {
+      arr[indx] = "odd"
+    }
+  })
+  return arr;
 };
 
 /* ------------------------------------------------------------------------------------------------
